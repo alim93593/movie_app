@@ -4,7 +4,7 @@ import 'package:movie_app/movie/domain/entities/movie_detail.dart';
 class MovieDetailsModel extends MovieDetail {
   const MovieDetailsModel({
     required super.genres,
-    required super.backDropBath,
+    super.backDropBath,
     required super.id,
     required super.overView,
     required super.releaseDate,
@@ -15,14 +15,14 @@ class MovieDetailsModel extends MovieDetail {
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
       MovieDetailsModel(
         genres: List<GenresModel>.from(
-          json['genre_ids'].map((x)=>GenresModel.fromJson(x))
+          json['genres'].map((x)=>GenresModel.fromJson(x))
         ),
         backDropBath: json['backdrop_path'],
         id: json['id'],
         overView: json['overview'],
         releaseDate: json['release_date'],
-        runTime: json['popularity'],
+        runTime: json['runtime'],
         title: json['title'],
-        voteAverage: json['vote_average'],
+        voteAverage: json['vote_average'].toDouble(),
       );
 }

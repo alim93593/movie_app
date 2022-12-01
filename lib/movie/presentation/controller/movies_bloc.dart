@@ -24,33 +24,36 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     on<GetTopRatedMoviesEvents>(getTopRatedMovies);
   }
 
-  FutureOr<void> getNowPlayingMovies(GetNowPlayingMoviesEvents event, Emitter<MoviesState> emit)async {
+  FutureOr<void> getNowPlayingMovies(
+      GetNowPlayingMoviesEvents event, Emitter<MoviesState> emit) async {
     final result = await getNowPlayingUseCase(const NoParameters());
     result.fold(
-          (l) => emit(state.copyWith(
+      (l) => emit(state.copyWith(
           nowPlayingState: RequestState.error, nowPlayingMessage: l.message)),
-          (r) => emit(state.copyWith(
+      (r) => emit(state.copyWith(
           nowPlayingState: RequestState.loaded, nowPlayingMovies: r)),
     );
   }
 
-  FutureOr<void> getTopPopularMovies(GetPopularMoviesEvents event, Emitter<MoviesState> emit) async{
+  FutureOr<void> getTopPopularMovies(
+      GetPopularMoviesEvents event, Emitter<MoviesState> emit) async {
     final result = await getTopRatedMovieUseCase(const NoParameters());
     result.fold(
-          (l) => emit(state.copyWith(
+      (l) => emit(state.copyWith(
           topRatedState: RequestState.error, topRatedMessage: l.message)),
-          (r) => emit(state.copyWith(
-              topRatedState: RequestState.loaded, topRatedMovies: r)),
+      (r) => emit(state.copyWith(
+          topRatedState: RequestState.loaded, topRatedMovies: r)),
     );
   }
 
-  FutureOr<void> getTopRatedMovies(GetTopRatedMoviesEvents event, Emitter<MoviesState> emit)async {
+  FutureOr<void> getTopRatedMovies(
+      GetTopRatedMoviesEvents event, Emitter<MoviesState> emit) async {
     final result = await getPopularMoviesUseCase(const NoParameters());
     result.fold(
-          (l) => emit(state.copyWith(
+      (l) => emit(state.copyWith(
           popularState: RequestState.error, popularMessage: l.message)),
-          (r) => emit(state.copyWith(
-          popularState: RequestState.loaded, popularMovies: r)),
+      (r) => emit(
+          state.copyWith(popularState: RequestState.loaded, popularMovies: r)),
     );
   }
 }

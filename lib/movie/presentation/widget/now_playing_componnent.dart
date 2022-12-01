@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/movie/presentation/controller/movies_bloc.dart';
 import 'package:movie_app/movie/presentation/controller/movies_state.dart';
+import 'package:movie_app/movie/presentation/screens/movie_detail_screen.dart';
 
 import '../../../core/network/api_constance.dart';
 import '../../../core/utils/enums.dart';
@@ -43,7 +44,13 @@ class NowPlayingComponnent extends StatelessWidget {
                       return GestureDetector(
                         key: const Key('openMovieMinimalDetail'),
                         onTap: () {
-                          /// TODO : NAVIGATE TO MOVIE DETAILS
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MovieDetailScreen(
+                                        id: item.id,
+                                      )));
                         },
                         child: Stack(
                           alignment: Alignment.center,
@@ -80,9 +87,11 @@ class NowPlayingComponnent extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 16.0),
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         const Icon(
                                           Icons.circle,
@@ -100,7 +109,8 @@ class NowPlayingComponnent extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(bottom: 16.0),
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
                                     child: Text(
                                       item.title,
                                       textAlign: TextAlign.center,
@@ -130,7 +140,8 @@ class NowPlayingComponnent extends StatelessWidget {
             );
         }
       },
-      buildWhen: (previous, current)=>previous.nowPlayingState!=current.nowPlayingState,
+      buildWhen: (previous, current) =>
+          previous.nowPlayingState != current.nowPlayingState,
     );
   }
 }

@@ -5,14 +5,14 @@ import 'package:movie_app/core/usecase/base_use_case.dart';
 import 'package:movie_app/movie/domain/entities/movie_detail.dart';
 import 'package:movie_app/movie/domain/repository/base_movies_repository.dart';
 
-class GetMovieDetailsUseCase extends BaseUseCase<List<MovieDetail>,MovieDetailsParameters>{
+class GetMovieDetailsUseCase extends BaseUseCase<MovieDetail,MovieDetailsParameters>{
   final  BaseMoviesRepository baseMoviesRepository;
 
   GetMovieDetailsUseCase(this.baseMoviesRepository);
 
   @override
-  Future<Either<Failure, List<MovieDetail>>> call(MovieDetailsParameters parameters)async {
-    return await baseMoviesRepository.getMovieDetails();
+  Future<Either<Failure, MovieDetail>> call(MovieDetailsParameters parameters)async {
+    return await baseMoviesRepository.getMovieDetails(parameters);
   }
 }
 class MovieDetailsParameters extends Equatable{

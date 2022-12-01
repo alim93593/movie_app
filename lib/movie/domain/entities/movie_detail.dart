@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:movie_app/movie/domain/entities/geners.dart';
 
 class MovieDetail extends Equatable {
-  final String backDropBath;
+  final String? backDropBath;
   final List<Genres> genres;
   final int id;
   final String overView;
   final String releaseDate;
   final int runTime;
   final String title;
-  final String voteAverage;
+  final double voteAverage;
 
   const MovieDetail({
     required this.genres,
